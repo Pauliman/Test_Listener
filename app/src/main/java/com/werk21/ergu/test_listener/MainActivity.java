@@ -7,7 +7,8 @@ import android.widget.Button;
 /**
  * This class manages a single button that triggers a dynamical dialog.
  * The button is assigned an onClick-listener programmatically in the start()-method while the
- * same effect could be achieved by setting up android:onClick="makeDialog" in the layout-XML-file. *
+ * same effect could be achieved by setting up android:onClick="makeDialog" in the layout-XML-file.
+ * @author Pauliman
  */
 public class MainActivity extends AppCompatActivity {
     /**

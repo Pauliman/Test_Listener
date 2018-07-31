@@ -2,6 +2,7 @@ package com.werk21.ergu.test_listener;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment; // if android.support.app.DialogFragment is used the call is: .show(this.getFragmentManager(),"id");
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.Toast;
  * It assigns a title, a message text and texts for the positive and the
  * negative button. Further information on how to extend this basic example
  * can be found here: https://developer.android.com/guide/topics/ui/dialogs
+ * @author Pauliman
  */
 public class DialogProvider extends DialogFragment {
     /**
@@ -29,6 +31,7 @@ public class DialogProvider extends DialogFragment {
      * @return a Dialog object on which to call the .show()-method to start the dialog.
      */
     @Override
+    @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         //++++++++++++ initializes class fields from bundle +++++++++++++++++
