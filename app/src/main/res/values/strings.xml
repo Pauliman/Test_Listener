@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Test_Listener</string>
+    <string name="dialog_title">DIALOG TITLE</string>
+    <string name="dialog_message">THIS IS THE MAIN MESSAGE OF THE DIALOG.</string>
+    <string name="dialog_positive">GOT IT</string>
+    <string name="dialog_negative">DOAH!</string>
+</resources>
