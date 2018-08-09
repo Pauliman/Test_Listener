@@ -1,8 +1,11 @@
 package com.werk21.ergu.test_listener;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 /**
  * This class manages a single button that triggers a dynamical dialog.
@@ -14,7 +17,8 @@ public class MainActivity extends AppCompatActivity {
     /**
      * the only View element of this activity
      */
-    Button btn;
+    private Button btn;
+    private int currentMessage;
 
     /**
      * Gets a handle on the layout-XML resource and the button within it.
@@ -25,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         btn = this.findViewById(R.id.btn_press);
+        currentMessage = 1;
         start();
     } // end of onCreate()
 
@@ -36,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                makeDialog();
+                makeSecondDialog(); //change method call to make use of one or the other principle
             }
         });
     } // end of start()
@@ -59,4 +64,36 @@ public class MainActivity extends AppCompatActivity {
         dp.setArguments(bundle);
         dp.show(this.getSupportFragmentManager(), "message");
     } // end of makeDialog()
+
+    /**
+     * Creates an AlertDialog and assigns the primary components title, message, positive and negative
+     * buttons. However, the definition of the button's behaviour is taken outside of the dialog object
+     * and thus allows interaction between the activity and the elements of the dialog.
+     */
+    private void makeSecondDialog(){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("The Ice Man")
+                .setMessage("ICECREAM ANYONE?")
+                .setPositiveButton("OK", null)
+                .setNegativeButton("NO", null);
+        final AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+        Button posBtn = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        posBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView tv_message = (TextView) alertDialog.findViewById(android.R.id.message);
+                tv_message.setText("Here you are Buddy, knock yourself out");
+
+            }
+        });
+        Button negBtn = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+        negBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                TextView tv_message = (TextView) alertDialog.findViewById(android.R.id.message);
+                tv_message.setText("Good. More for me then.");
+            }
+        });
+    }
 } // end of class
