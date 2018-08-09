@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                makeSecondDialog(); //change method call to make use of one or the other principle
+                makeSecondDialog(); //change method call to make use of one or the other method
             }
         });
     } // end of start()
@@ -92,7 +92,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 TextView tv_message = (TextView) alertDialog.findViewById(android.R.id.message);
+                //Even though this works like a charm for message, it did not work for me with 'title' 
+                //which is also a standard Dialog component. Strange.                
                 tv_message.setText("Good. More for me then.");
+                //tv_mesage.setText(R.string.my_string_in_resource_folder);
+                /*
+                To make it more dynamic still, you can get an int[] where you store the values that you
+                might need here. You best retrieve those values in an init()-mehtod of your Acrivity.
+                int[] myStrings = int[]{
+                this.getResources().getIdentifier("com.werk21.ergu.test_listener:string/my_string", null, null),
+                this.getResources().getIdentifier("com.werk21.ergu.test_listener:string/my_second_string", null, null)};
+                Then the following call would be possible where x is an int as your code needs it.
+                tv_mesage.setText(myStrings[x]);
+                */
             }
         });
     }
