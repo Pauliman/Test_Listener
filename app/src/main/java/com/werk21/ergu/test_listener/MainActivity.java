@@ -8,17 +8,20 @@ import android.widget.Button;
 import android.widget.TextView;
 
 /**
- * This class manages a single button that triggers a dynamical dialog.
+ * This class manages a single button that triggers a dynamic dialog.
  * The button is assigned an onClick-listener programmatically in the start()-method while the
  * same effect could be achieved by setting up android:onClick="makeDialog" in the layout-XML-file.
+ * The button may trigger two versions of a Dialog makeDialog() using a DialogProvider extending DialogFragment and 
+ * the other, makeSecondDialog(), uses an AlertDialog the behaviour of which is applied after the Dialog was created.
+ * This allows for more flexibility as the content of the AlertDialog object can easily be rendered by the methods in the AlertDialog's
+ * onClick-Listener.
  * @author Pauliman
  */
 public class MainActivity extends AppCompatActivity {
     /**
      * the only View element of this activity
      */
-    private Button btn;
-    private int currentMessage;
+    private Button btn;    
 
     /**
      * Gets a handle on the layout-XML resource and the button within it.
@@ -28,8 +31,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btn = this.findViewById(R.id.btn_press);
-        currentMessage = 1;
+        btn = this.findViewById(R.id.btn_press);        
         start();
     } // end of onCreate()
 
@@ -41,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                makeSecondDialog(); //change method call to make use of one or the other method
+                //makeDialog();       uncomment to activate
+                makeSecondDialog(); // comment to deactivate
             }
         });
     } // end of start()
@@ -52,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
      * way to transmit data to a fragment and adhere to the life cycle rules.
      * At last the show()-method is called on the Fragment-object passing a
      * FragmentManager-object and a identifier String that represents the internal
-     * name of this dialog.
+     * name of this dialog. It's important not to mix the required imports as android.app.* 
+     * and android.supportv7.app.* cause a hard time for the compiler.
      */
     public void makeDialog(){
         DialogProvider dp = new DialogProvider();
